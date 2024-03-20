@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="/">
+        {%csrf_token%}
+        <label for="title" >Title</label><br>
+        <input type="text" name="title" placeholder="Title" id=""><br>
+        <label for="des">Description</label><br>
+        <textarea id="des" name="des" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <table>
+        <tr>
+            <th>Sno</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>ACTION</th>
+        </tr>
+        {% for todo in alltodos %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{todo.title}}</td>
+            <td>{{todo.des}}</td>
+            <td>
+                <form  method="get" action="/update" style="display: inline-block;">
+                
+                <input type="text" value="{{todo.sno}}" name= 'sno' style="display:none;">
+                <input type="submit" value="Update">
+                
+                </form>
+
+                <form action="" method="get" style="display: inline-block;">
+                    <button type="submit" >Delete</button>
+                    <input type="text" value="{{todo.sno}}" name= 'sno' style="display:none;">
+
+                </form>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
